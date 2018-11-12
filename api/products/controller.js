@@ -1,7 +1,16 @@
-module.exports.getAll = (req, res) => {
-    res.send("List of Products");
-  };
+const models = require("../models");
 
-  module.exports.post = (req, res) => {
-    res.send("Save New Product");
-  }
+exports.getAll = (req, res) => {
+  models.products
+    .findAll()
+    .then(products => res.send(products))
+    .catch(err => res.send(err));
+};
+
+exports.post = (req, res) => {
+  console.log(req.body)
+  models.products
+    .create(req.body)
+    .then(product => res.send(product))
+    .catch(err => res.send(err));
+};
