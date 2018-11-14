@@ -38,6 +38,19 @@ exports.deleteAll = (req, res) => {
     .catch(err => res.send(err));
 };
 
-exports.search = (req,res) =>{
-  models.products.findAll({where: req.query}).then(products => res.send(products)).catch(err=>res.send(err))
+exports.search = (req, res) => {
+  console.log(req.query)
+  models.products.findAll({ where: req.query })
+      .then(products => res.send(products))
+      .catch(err => res.send(err))
 }
+
+exports.update = (req, res) => {
+  models.products.update(req.body, {
+      where: {
+          id: req.params.id
+      }
+  }).then(result => res.send(result))
+      .catch(err => res.send(err))
+}
+
